@@ -3,13 +3,17 @@
     <header>
       <div class="logo">
         <a @click="logInView = false">
-          <img :src="urlLogo" width="200" alt="Frankie Financial - Black Logo - Without fon.png" />
+          <img
+            :src="urlLogo"
+            width="200"
+            alt="VueJs-Login-page - Black Logo - Without fon.png"
+          />
         </a>
       </div>
       <nav>
         <ul>
           <li>
-            <a class="about" @click="openLink">About Frankie</a>
+            <a class="about" @click="openLink">About VueJs-Login-page</a>
           </li>
           <li>
             <div class="user">
@@ -34,39 +38,40 @@ export default {
   name: "Home",
   components: {
     Login,
-    Reset
+    Reset,
   },
   data() {
     return {
       newEmail: "",
       logInView: false,
-      urlLogo: "https://landen.imgix.net/4xq4is7892ks/assets/twvggbvm.png?w=400"
+      urlLogo:
+        "https://landen.imgix.net/4xq4is7892ks/assets/twvggbvm.png?w=400",
     };
   },
   computed: {},
   methods: {
     openLink() {
-      window.open("https://www.frankiefinancial.com", "_blank");
+      window.open("https://www.financial.com", "_blank");
     },
     setResetView(val) {
       this.logInView = val;
     },
     setNewEmail(val) {
       this.newEmail = val;
-    }
+    },
   },
   created() {
-    EventBus.$on("switchView", data => {
+    EventBus.$on("switchView", (data) => {
       this.setResetView(data);
     });
-    EventBus.$on("newEmailAdded", data => {
+    EventBus.$on("newEmailAdded", (data) => {
       this.setNewEmail(data);
     });
   },
   beforeDestroy() {
     EventBus.$off("switchView");
     EventBus.$off("newEmailAdded");
-  }
+  },
 };
 </script>
 <style lang="scss">
@@ -77,7 +82,7 @@ $prefixFormReset: reset-form;
 
 .#{$prefixContainer} {
   min-height: 500px;
-  background-image: url("~@/assets/frankie-background.png");
+  background-image: url("~@/assets/background.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;

@@ -1,4 +1,4 @@
-# frankie-case-study
+# VueJs Login page
 
 ## Project setup
 ```

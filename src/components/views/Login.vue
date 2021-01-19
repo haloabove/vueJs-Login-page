@@ -5,7 +5,13 @@
       <form @submit.prevent="onSubmit">
         <div class="input">
           <label for="email">Email:</label>
-          <input type="email" id="email" placeholder="Enter Email" required v-model="email" />
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter Email"
+            required
+            v-model="email"
+          />
         </div>
         <div class="input">
           <label for="password">Password:</label>
@@ -39,7 +45,7 @@ import Messages from "../views/Messages";
 export default {
   name: "Login",
   components: {
-    Messages
+    Messages,
   },
   data() {
     return {
@@ -48,7 +54,7 @@ export default {
       resetPassView: true,
       errors: [],
       success: [],
-      response: null
+      response: null,
     };
   },
   computed: {},
@@ -56,7 +62,7 @@ export default {
     onSubmit(e) {
       const formData = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
       this.validateForm(e, formData);
@@ -65,26 +71,26 @@ export default {
         fetch("https://reqres.in/api/login", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(formData),
         })
-        .then(response => {
-          if (!response.ok) {
-            throw response;
-          }
-          return response.json();
-        })
-        .then(json => {
-          let key = json.token;
-          localStorage.setItem(key, "FrankieLogin");
-          this.success.push("Login successful!");
-        })
-        .catch(err => {
-          err.json().then(errorMessage => {
-            this.errors.push(errorMessage.error);
+          .then((response) => {
+            if (!response.ok) {
+              throw response;
+            }
+            return response.json();
+          })
+          .then((json) => {
+            let key = json.token;
+            localStorage.setItem(key, "Login");
+            this.success.push("Login successful!");
+          })
+          .catch((err) => {
+            err.json().then((errorMessage) => {
+              this.errors.push(errorMessage.error);
+            });
           });
-        });
       }
     },
     switchView() {
@@ -119,9 +125,9 @@ export default {
     validateEmail(email) {
       let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
-    }
+    },
   },
   created() {},
-  beforeDestroy() {}
+  beforeDestroy() {},
 };
 </script>
